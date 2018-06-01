@@ -1,4 +1,5 @@
 * text=auto !eol
+/.classpath -text
 .settings/org.eclipse.jdt.core.prefs -text
 .settings/org.eclipse.m2e.core.prefs -text
 .settings/org.eclipse.wst.common.component -text
