@@ -7,6 +7,7 @@
 .settings/org.eclipse.wst.common.project.facet.core.xml -text
 .settings/org.eclipse.wst.validation.prefs -text
 .settings/org.maven.ide.eclipse.prefs -text
+/pom.xml -text
 src/main/java/edu/uiowa/slis/ClinicalTrialsTagLib/ClinicalTrialsTagLibBodyTagSupport.java -text
 src/main/java/edu/uiowa/slis/ClinicalTrialsTagLib/ClinicalTrialsTagLibTagSupport.java -text
 src/main/java/edu/uiowa/slis/ClinicalTrialsTagLib/DBTest.java -text
