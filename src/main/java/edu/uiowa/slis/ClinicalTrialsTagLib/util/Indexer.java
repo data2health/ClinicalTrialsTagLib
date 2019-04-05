@@ -39,8 +39,8 @@ public class Indexer implements Runnable {
 
 	Class.forName("org.postgresql.Driver");
 	Properties props = new Properties();
-	props.setProperty("user", "eichmann");
-	props.setProperty("password", "translational");
+	props.setProperty("user", prop_file.getProperty("db.user"));
+	props.setProperty("password", prop_file.getProperty("db.password"));
 	if (use_ssl.equals("true")) {
 	    props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
 	    props.setProperty("ssl", "true");

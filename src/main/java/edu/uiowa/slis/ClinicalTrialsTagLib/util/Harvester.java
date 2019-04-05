@@ -38,9 +38,9 @@ public class Harvester {
     @SuppressWarnings("unused")
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, InterruptedException {
 	PropertyConfigurator.configure(args[0]);
-	String db_user = prop_file.getProperty("db.user.name", "eichmann");
+	String db_user = prop_file.getProperty("db.user.name");
 	logger.debug("Database User Name: " + db_user);
-	String db_pass = prop_file.getProperty("db.user.password", "translational");
+	String db_pass = prop_file.getProperty("db.user.password");
 
 	String use_ssl = prop_file.getProperty("nihdb.use.ssl", "false");
 	logger.debug("Database SSL: " + use_ssl);
@@ -56,8 +56,8 @@ public class Harvester {
 
 	Class.forName("org.postgresql.Driver");
 	Properties props = new Properties();
-	props.setProperty("user", "eichmann");
-	props.setProperty("password", "translational");
+	props.setProperty("user", prop_file.getProperty("db.user.name"));
+	props.setProperty("password", prop_file.getProperty("db.user.password"));
 	if (use_ssl.equals("true")) {
 	    props.setProperty("sslfactory", "org.postgresql.ssl.NonValidatingFactory");
 	    props.setProperty("ssl", "true");
