@@ -564,6 +564,12 @@ src/main/java/edu/uiowa/slis/ClinicalTrialsTagLib/util/Parser.java -text
 src/main/java/edu/uiowa/slis/ClinicalTrialsTagLib/util/PropertyLoader.java -text
 src/main/resources/META-INF/taglib.tld -text
 src/non-packaged-resources/Model.clay -text
+src/non-packaged-resources/Model2020.clay -text svneol=unset#application/xml
+src/non-packaged-resources/Model2020.sql -text
+src/non-packaged-resources/bootstrap.sql -text
 src/non-packaged-resources/clinical_trials.sql -text
+src/non-packaged-resources/refresh.sql -text
+src/non-packaged-resources/study_structure.json -text
+src/non-packaged-resources/views.sql -text
 src/test/java/edu/uiowa/slis/ClinicalTrialsTagLib/README.txt -text
 src/test/resources/README.txt -text

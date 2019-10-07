@@ -2,6 +2,7 @@ package edu.uiowa.slis.ClinicalTrialsTagLib.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -12,12 +13,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Harvester {
     static Logger logger = Logger.getLogger(Harvester.class);
@@ -34,10 +44,13 @@ public class Harvester {
      * @throws SQLException
      * @throws IOException
      * @throws InterruptedException 
+     * @throws DocumentException 
      */
     @SuppressWarnings("unused")
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, InterruptedException {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, InterruptedException, DocumentException {
 	PropertyConfigurator.configure(args[0]);
+	int count = 0;
+	
 	String db_user = prop_file.getProperty("db.user.name");
 	logger.debug("Database User Name: " + db_user);
 	String db_pass = prop_file.getProperty("db.user.password");
@@ -63,6 +76,34 @@ public class Harvester {
 	    props.setProperty("ssl", "true");
 	}
 	conn = DriverManager.getConnection(db_url, props);
+
+	logger.info("opening /Users/eichmann/downloads/ct/AllAPIJSON.zip");
+	ZipFile zipFile = new ZipFile("/Users/eichmann/downloads/ct/AllAPIJSON.zip");
+	Enumeration<ZipEntry> entryEnum = (Enumeration<ZipEntry>) zipFile.entries();
+	while (entryEnum.hasMoreElements()) {
+	    ZipEntry entry = entryEnum.nextElement();
+	    if (entry.isDirectory() || !entry.getName().contains(".json")) {
+		logger.info("entry: " + entry.getName());
+		continue;
+	    }
+	    logger.debug("entry: " + entry.getName());
+	    count++;
+
+	    InputStream content = zipFile.getInputStream(entry);
+	    JSONObject object = new JSONObject(new JSONTokener(content));
+//	    SAXReader reader = new SAXReader(false);
+//	    Document document = reader.read(content);
+//	    Element root = document.getRootElement();
+//	    logger.debug("document root: " + root.getName());
+		PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials.raw2 values (?::jsonb)");
+		citeStmt.setString(1, object.toString());
+		citeStmt.executeUpdate();
+		citeStmt.close();
+	}
+	zipFile.close();
+	logger.info("file count: " + count);
+	
+	if (1<2) return;
 
 	// doing this simplifies the HTTPS connection request
 	System.setProperty("jsse.enableSNIExtension", "false");
