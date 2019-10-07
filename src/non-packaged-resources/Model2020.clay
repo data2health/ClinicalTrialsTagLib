@@ -9,7 +9,7 @@
 <table-list>
 <table alias="" name="arm_group" remarks="" uid="32394a4b:16d9cba3ffa:-7f7a">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="948" y="520"/>
+<table-figure-bounds height="-1" width="-1" x="820" y="489"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f78">
 <column-description/>
@@ -61,7 +61,7 @@
 </table>
 <table alias="" name="arm_group_intervention_name" remarks="" uid="32394a4b:16d9cba3ffa:-7f72">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="989" y="398"/>
+<table-figure-bounds height="-1" width="-1" x="871" y="358"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f70">
 <column-description/>
@@ -109,7 +109,7 @@
 </table>
 <table alias="" name="avail_ipd" remarks="" uid="32394a4b:16d9cba3ffa:-7f6c">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="398" y="734"/>
+<table-figure-bounds height="-1" width="-1" x="305" y="1747"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f6a">
 <column-description/>
@@ -167,7 +167,7 @@
 </table>
 <table alias="" name="central_contact" remarks="" uid="32394a4b:16d9cba3ffa:-7f64">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="85" y="423"/>
+<table-figure-bounds height="-1" width="-1" x="43" y="615"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f62">
 <column-description/>
@@ -231,7 +231,7 @@
 </table>
 <table alias="" name="collaborator" remarks="" uid="32394a4b:16d9cba3ffa:-7f5b">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="1095" y="678"/>
+<table-figure-bounds height="-1" width="-1" x="206" y="315"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f59">
 <column-description/>
@@ -277,7 +277,7 @@
 </table>
 <table alias="" name="condition" remarks="" uid="32394a4b:16d9cba3ffa:-7f55">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="374" y="939"/>
+<table-figure-bounds height="-1" width="-1" x="200" y="409"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f53">
 <column-description/>
@@ -317,7 +317,7 @@
 </table>
 <table alias="" name="condition_ancestor" remarks="" uid="32394a4b:16d9cba3ffa:-7f50">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="347" y="851"/>
+<table-figure-bounds height="-1" width="-1" x="1232" y="1391"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f4e">
 <column-description/>
@@ -363,7 +363,7 @@
 </table>
 <table alias="" name="condition_browse_branch" remarks="" uid="32394a4b:16d9cba3ffa:-7f4a">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="83" y="873"/>
+<table-figure-bounds height="-1" width="-1" x="1632" y="1242"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f48">
 <column-description/>
@@ -409,7 +409,7 @@
 </table>
 <table alias="" name="condition_browse_leaf" remarks="" uid="32394a4b:16d9cba3ffa:-7f44">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="341" y="488"/>
+<table-figure-bounds height="-1" width="-1" x="1408" y="1300"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f42">
 <column-description/>
@@ -467,7 +467,7 @@
 </table>
 <table alias="" name="condition_mesh" remarks="" uid="32394a4b:16d9cba3ffa:-7f3c">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="606" y="742"/>
+<table-figure-bounds height="-1" width="-1" x="1049" y="1440"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f3a">
 <column-description/>
@@ -513,7 +513,7 @@
 </table>
 <table alias="" name="design_observational_model" remarks="" uid="32394a4b:16d9cba3ffa:-7f36">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="96" y="965"/>
+<table-figure-bounds height="-1" width="-1" x="423" y="335"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f34">
 <column-description/>
@@ -553,7 +553,7 @@
 </table>
 <table alias="" name="design_time_perspective" remarks="" uid="32394a4b:16d9cba3ffa:-7f31">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="328" y="1025"/>
+<table-figure-bounds height="-1" width="-1" x="535" y="247"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f2f">
 <column-description/>
@@ -593,7 +593,7 @@
 </table>
 <table alias="" name="design_who_masked" remarks="" uid="32394a4b:16d9cba3ffa:-7f2c">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="121" y="1071"/>
+<table-figure-bounds height="-1" width="-1" x="662" y="166"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f2a">
 <column-description/>
@@ -633,7 +633,7 @@
 </table>
 <table alias="" name="info" remarks="" uid="32394a4b:16d9cba3ffa:-7f27">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="106" y="555"/>
+<table-figure-bounds height="-1" width="-1" x="251" y="189"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f25">
 <column-description/>
@@ -691,7 +691,7 @@
 </table>
 <table alias="" name="intervention" remarks="" uid="32394a4b:16d9cba3ffa:-7f1f">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="596" y="490"/>
+<table-figure-bounds height="-1" width="-1" x="1067" y="553"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f1d">
 <column-description/>
@@ -743,7 +743,7 @@
 </table>
 <table alias="" name="intervention_ancestor" remarks="" uid="32394a4b:16d9cba3ffa:-7f16">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="94" y="1178"/>
+<table-figure-bounds height="-1" width="-1" x="1228" y="1186"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f14">
 <column-description/>
@@ -789,7 +789,7 @@
 </table>
 <table alias="" name="intervention_arm_group_label" remarks="" uid="32394a4b:16d9cba3ffa:-7f10">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="659" y="343"/>
+<table-figure-bounds height="-1" width="-1" x="1293" y="470"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f0e">
 <column-description/>
@@ -837,7 +837,7 @@
 </table>
 <table alias="" name="intervention_browse_branch" remarks="" uid="32394a4b:16d9cba3ffa:-7f0a">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="304" y="1121"/>
+<table-figure-bounds height="-1" width="-1" x="1649" y="1065"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f08">
 <column-description/>
@@ -883,7 +883,7 @@
 </table>
 <table alias="" name="intervention_browse_leaf" remarks="" uid="32394a4b:16d9cba3ffa:-7f04">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="340" y="609"/>
+<table-figure-bounds height="-1" width="-1" x="1416" y="1127"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7f02">
 <column-description/>
@@ -941,7 +941,7 @@
 </table>
 <table alias="" name="intervention_mesh" remarks="" uid="32394a4b:16d9cba3ffa:-7efc">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="608" y="641"/>
+<table-figure-bounds height="-1" width="-1" x="1048" y="1245"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7efa">
 <column-description/>
@@ -987,7 +987,7 @@
 </table>
 <table alias="" name="intervention_other_name" remarks="" uid="32394a4b:16d9cba3ffa:-7ef6">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="465" y="365"/>
+<table-figure-bounds height="-1" width="-1" x="1208" y="351"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ef4">
 <column-description/>
@@ -1035,7 +1035,7 @@
 </table>
 <table alias="" name="ipd_sharing_info_type" remarks="" uid="32394a4b:16d9cba3ffa:-7ef0">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="397" y="1259"/>
+<table-figure-bounds height="-1" width="-1" x="303" y="1870"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7eee">
 <column-description/>
@@ -1075,7 +1075,7 @@
 </table>
 <table alias="" name="keyword" remarks="" uid="32394a4b:16d9cba3ffa:-7eeb">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="229" y="1284"/>
+<table-figure-bounds height="-1" width="-1" x="173" y="485"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ee9">
 <column-description/>
@@ -1115,7 +1115,7 @@
 </table>
 <table alias="" name="large_doc" remarks="" uid="32394a4b:16d9cba3ffa:-7ee6">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="108" y="685"/>
+<table-figure-bounds height="-1" width="-1" x="1058" y="1709"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ee4">
 <column-description/>
@@ -1197,7 +1197,7 @@
 </table>
 <table alias="" name="location" remarks="" uid="32394a4b:16d9cba3ffa:-7eda">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="343" y="1440"/>
+<table-figure-bounds height="-1" width="-1" x="297" y="1378"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ed8">
 <column-description/>
@@ -1267,7 +1267,7 @@
 </table>
 <table alias="" name="location_contact" remarks="" uid="32394a4b:16d9cba3ffa:-7ecf">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="84" y="1452"/>
+<table-figure-bounds height="-1" width="-1" x="39" y="1350"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ecd">
 <column-description/>
@@ -1339,7 +1339,7 @@
 </table>
 <table alias="" name="nct_id_alias" remarks="" uid="32394a4b:16d9cba3ffa:-7ec5">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="412" y="1358"/>
+<table-figure-bounds height="-1" width="-1" x="350" y="111"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ec3">
 <column-description/>
@@ -1379,7 +1379,7 @@
 </table>
 <table alias="" name="other_outcome" remarks="" uid="32394a4b:16d9cba3ffa:-7ec0">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="960" y="895"/>
+<table-figure-bounds height="-1" width="-1" x="1164" y="935"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ebe">
 <column-description/>
@@ -1431,7 +1431,7 @@
 </table>
 <table alias="" name="overall_official" remarks="" uid="32394a4b:16d9cba3ffa:-7eb9">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="972" y="1006"/>
+<table-figure-bounds height="-1" width="-1" x="13" y="736"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7eb7">
 <column-description/>
@@ -1483,7 +1483,7 @@
 </table>
 <table alias="" name="primary_outcome" remarks="" uid="32394a4b:16d9cba3ffa:-7eb2">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="1089" y="781"/>
+<table-figure-bounds height="-1" width="-1" x="924" y="719"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7eb0">
 <column-description/>
@@ -1535,7 +1535,7 @@
 </table>
 <table alias="" name="reference" remarks="" uid="32394a4b:16d9cba3ffa:-7eab">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="349" y="1629"/>
+<table-figure-bounds height="-1" width="-1" x="302" y="1540"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ea9">
 <column-description/>
@@ -1587,7 +1587,7 @@
 </table>
 <table alias="" name="removed_country" remarks="" uid="32394a4b:16d9cba3ffa:-7ea3">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="403" y="1867"/>
+<table-figure-bounds height="-1" width="-1" x="1111" y="1537"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7ea1">
 <column-description/>
@@ -1627,7 +1627,7 @@
 </table>
 <table alias="" name="retraction" remarks="" uid="32394a4b:16d9cba3ffa:-7e9e">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="134" y="1632"/>
+<table-figure-bounds height="-1" width="-1" x="93" y="1534"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7e9c">
 <column-description/>
@@ -1681,7 +1681,7 @@
 </table>
 <table alias="" name="secondary_outcome" remarks="" uid="32394a4b:16d9cba3ffa:-7e97">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="988" y="1124"/>
+<table-figure-bounds height="-1" width="-1" x="1042" y="822"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7e95">
 <column-description/>
@@ -1733,7 +1733,7 @@
 </table>
 <table alias="" name="see_also_link" remarks="" uid="32394a4b:16d9cba3ffa:-7e88">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="397" y="1761"/>
+<table-figure-bounds height="-1" width="-1" x="303" y="1644"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7e86">
 <column-description/>
@@ -1779,7 +1779,7 @@
 </table>
 <table alias="" name="std_age" remarks="" uid="32394a4b:16d9cba3ffa:-7e82">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="436" y="1945"/>
+<table-figure-bounds height="-1" width="-1" x="425" y="652"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7e80">
 <column-description/>
@@ -2366,7 +2366,7 @@
 </table>
 <table alias="" name="unposted_event" remarks="" uid="32394a4b:16d9cba3ffa:-7e22">
 <table-description/>
-<table-figure-bounds height="-1" width="-1" x="1027" y="1240"/>
+<table-figure-bounds height="-1" width="-1" x="998" y="1897"/>
 <column-list>
 <column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="32394a4b:16d9cba3ffa:-7e20">
 <column-description/>

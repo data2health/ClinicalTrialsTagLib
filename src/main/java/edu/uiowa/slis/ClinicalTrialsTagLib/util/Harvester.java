@@ -77,6 +77,11 @@ public class Harvester {
 	}
 	conn = DriverManager.getConnection(db_url, props);
 
+	logger.info("truncating raw...");
+	PreparedStatement closeStmt = conn.prepareStatement("truncate clinical_trials_staging.raw cascade");
+	closeStmt.executeUpdate();
+	closeStmt.close();
+
 	logger.info("opening /Users/eichmann/downloads/ct/AllAPIJSON.zip");
 	ZipFile zipFile = new ZipFile("/Users/eichmann/downloads/ct/AllAPIJSON.zip");
 	Enumeration<ZipEntry> entryEnum = (Enumeration<ZipEntry>) zipFile.entries();
@@ -95,7 +100,7 @@ public class Harvester {
 //	    Document document = reader.read(content);
 //	    Element root = document.getRootElement();
 //	    logger.debug("document root: " + root.getName());
-		PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials.raw2 values (?::jsonb)");
+		PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials_staging.raw values (?::jsonb)");
 		citeStmt.setString(1, object.toString());
 		citeStmt.executeUpdate();
 		citeStmt.close();
