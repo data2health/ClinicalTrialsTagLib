@@ -568,6 +568,7 @@ src/non-packaged-resources/Model2020.clay -text svneol=unset#application/xml
 src/non-packaged-resources/Model2020.sql -text
 src/non-packaged-resources/bootstrap.sql -text
 src/non-packaged-resources/clinical_trials.sql -text
+src/non-packaged-resources/populate.sql -text
 src/non-packaged-resources/refresh.sql -text
 src/non-packaged-resources/study_structure.json -text
 src/non-packaged-resources/views.sql -text

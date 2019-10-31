@@ -78,7 +78,7 @@ public class Harvester {
 	conn = DriverManager.getConnection(db_url, props);
 
 	logger.info("truncating raw...");
-	PreparedStatement closeStmt = conn.prepareStatement("truncate clinical_trials_staging.raw cascade");
+	PreparedStatement closeStmt = conn.prepareStatement("truncate clinical_trials_staging.raw");
 	closeStmt.executeUpdate();
 	closeStmt.close();
 
@@ -96,46 +96,20 @@ public class Harvester {
 
 	    InputStream content = zipFile.getInputStream(entry);
 	    JSONObject object = new JSONObject(new JSONTokener(content));
-//	    SAXReader reader = new SAXReader(false);
-//	    Document document = reader.read(content);
-//	    Element root = document.getRootElement();
-//	    logger.debug("document root: " + root.getName());
-		PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials_staging.raw values (?::jsonb)");
-		citeStmt.setString(1, object.toString());
-		citeStmt.executeUpdate();
-		citeStmt.close();
+	    String id_string = object.getJSONObject("FullStudy").getJSONObject("Study").getJSONObject("ProtocolSection").getJSONObject("IdentificationModule").getString("NCTId");
+	    int id = Integer.parseInt(id_string.substring(3));
+	    String last_submit = object.getJSONObject("FullStudy").getJSONObject("Study").getJSONObject("ProtocolSection").getJSONObject("StatusModule").getString("LastUpdateSubmitDate");
+	    logger.info("id: " + id + "\tlast submit: " + last_submit);
+
+	    PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials_staging.raw values (?,?,?::jsonb)");
+	    citeStmt.setInt(1, id);
+	    citeStmt.setString(2, last_submit);
+	    citeStmt.setString(3, object.toString());
+	    citeStmt.executeUpdate();
+	    citeStmt.close();
 	}
 	zipFile.close();
 	logger.info("file count: " + count);
-	
-	if (1<2) return;
-
-	// doing this simplifies the HTTPS connection request
-	System.setProperty("jsse.enableSNIExtension", "false");
-
-	URL theURL = new URL("https://www.clinicaltrials.gov/ct2/crawl");
-	BufferedReader IODesc = new BufferedReader(new InputStreamReader(((HttpsURLConnection)theURL.openConnection()).getInputStream()));
-	String buffer = null;
-	while ((buffer = IODesc.readLine()) != null) {
-	    logger.trace("line: " + buffer);
-	    Matcher hrefMatcher = hrefPattern.matcher(buffer);
-	    if (hrefMatcher.find()) {
-		// definition entry
-		String path = hrefMatcher.group(1);
-		boolean retry = true;
-		do {
-		    try {
-			logPath = path;
-			groupLogged = false;
-			processGroup(new URL(theURL, path));
-			retry = false;
-		    } catch (Exception e) {
-			logger.error("\t\tretrying due to : " + e);
-			Thread.sleep(2000);
-		    }
-		} while (retry);
-	    }
-	}
     }
 
     static void processGroup(URL theURL) throws IOException, SQLException, InterruptedException {

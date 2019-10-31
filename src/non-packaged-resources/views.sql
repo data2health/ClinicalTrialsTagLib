@@ -1,6 +1,6 @@
 create view sections as
 select
-    ((contents->>'FullStudy')::jsonb->>'Rank')::int as id,
+    id,
     ((((contents->>'FullStudy')::jsonb->>'Study')::jsonb)->>'ProtocolSection')::jsonb as protocol_section,
     ((((contents->>'FullStudy')::jsonb->>'Study')::jsonb)->>'ResultsSection')::jsonb as results_section,
     ((((contents->>'FullStudy')::jsonb->>'Study')::jsonb)->>'AnnotationSection')::jsonb as annotation_section,
@@ -574,4 +574,29 @@ from
     clinical_trials_staging.sections
 cross join lateral
     jsonb_array_elements((((((derived_section->>'InterventionBrowseModule')::jsonb)->>'InterventionBrowseBranchList')::jsonb)->>'InterventionBrowseBranch')::jsonb) with ordinality as t(intervention_browse_branch,seqnum)
+;
+
+create materialized view queue as
+select
+    id
+from
+    clinical_trials.study
+where
+    not exists (select id from clinical_trials_staging.raw where study.id = raw.id)
+union
+select
+    id
+from
+    clinical_trials_staging.raw
+where
+    not exists (select id from clinical_trials.study where study.id = raw.id)
+union
+select
+    cts.id
+from
+    clinical_trials.study as ct,
+    clinical_trials_staging.raw as cts
+where
+        ct.id=cts.id
+    and ct.last_update_submit_date!=cts.last_update_submit_date
 ;
