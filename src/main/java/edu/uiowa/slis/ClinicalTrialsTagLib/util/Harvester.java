@@ -22,10 +22,7 @@ import java.util.zip.ZipFile;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -46,7 +43,7 @@ public class Harvester {
      * @throws InterruptedException 
      * @throws DocumentException 
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "unchecked" })
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException, InterruptedException, DocumentException {
 	PropertyConfigurator.configure(args[0]);
 	int count = 0;
