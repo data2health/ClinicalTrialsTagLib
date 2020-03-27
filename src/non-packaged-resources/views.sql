@@ -160,6 +160,17 @@ cross join lateral
     jsonb_array_elements_text((((((protocol_section->>'ConditionsModule')::jsonb)->>'KeywordList')::jsonb)->>'Keyword')::jsonb) with ordinality as t(keyword,seqnum)
 ;
 
+create view phase as
+select
+    id,
+    t.seqnum,
+    t.phase
+from
+    clinical_trials_staging.sections
+cross join lateral
+    jsonb_array_elements_text((((((protocol_section->>'DesignModule')::jsonb)->>'PhaseList')::jsonb)->>'Phase')::jsonb) with ordinality as t(phase,seqnum)
+;
+
 create view design_observational_model as
 select
     id,

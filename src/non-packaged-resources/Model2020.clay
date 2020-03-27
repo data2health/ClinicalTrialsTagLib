@@ -2410,6 +2410,46 @@
 </foreign-key-list>
 <index-list/>
 </table>
+<table alias="" name="phase" remarks="" uid="285a9066:17119adce73:-7fda">
+<table-description/>
+<table-figure-bounds height="-1" width="-1" x="68" y="501"/>
+<column-list>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="id" remarks="" uid="285a9066:17119adce73:-7fd6">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="true" name="seqnum" remarks="" uid="285a9066:17119adce73:-7fd5">
+<column-description/>
+<data-type jdbc-type="4" name="INT" selected-variant-pattern="INT">
+<variant type-name-pattern="INT"/>
+</data-type>
+</column>
+<column alias="" auto-increment="false" column-size="0" decimal-digits="0" default-value="" mandatory="false" name="phase" remarks="" uid="285a9066:17119adce73:-7fd4">
+<column-description/>
+<data-type jdbc-type="-1" literal-prefix="'" literal-suffix="'" name="TEXT" selected-variant-pattern="TEXT">
+<variant type-name-pattern="TEXT"/>
+</data-type>
+</column>
+</column-list>
+<primary-key alias="" name="PK_PHASE" remarks="" uid="285a9066:17119adce73:-7fd9">
+<primary-key-description/>
+<primary-key-column name="id"/>
+<primary-key-column name="seqnum"/>
+</primary-key>
+<unique-key-list/>
+<foreign-key-list>
+<foreign-key alias="" name="FK_phase_1" on-delete="" on-update="" referenced-key="PK_STUDY" referenced-table="study" referenced-table-schema="clinical_trials" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="285a9066:17119adce73:-7fad">
+<foreign-key-description/>
+<foreign-key-figure>
+<fk-fig-bendpoint-list/>
+</foreign-key-figure>
+<foreign-key-column column-name="id" referenced-key-column-name="id"/>
+</foreign-key>
+</foreign-key-list>
+<index-list/>
+</table>
 </table-list>
 </schema>
 </schema-list>

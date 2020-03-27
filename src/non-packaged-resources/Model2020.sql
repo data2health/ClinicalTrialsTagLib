@@ -475,6 +475,15 @@ CREATE TABLE clinical_trials.unposted_event (
                   REFERENCES clinical_trials.study (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE clinical_trials.phase (
+       id INT NOT NULL
+     , seqnum INT NOT NULL
+     , phase TEXT
+     , PRIMARY KEY (id, seqnum)
+     , CONSTRAINT FK_phase_1 FOREIGN KEY (id)
+                  REFERENCES clinical_trials.study (id)
+);
+
 CREATE TABLE clinical_trials.arm_group_intervention_name (
        id INT NOT NULL
      , seqnum INT NOT NULL

@@ -7,6 +7,7 @@ insert into clinical_trials.info select * from clinical_trials_staging.info wher
 insert into clinical_trials.collaborator select * from clinical_trials_staging.collaborator where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.condition select * from clinical_trials_staging.condition where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.keyword select * from clinical_trials_staging.keyword where id in (select id from clinical_trials_staging.queue);
+insert into clinical_trials.phase select * from clinical_trials_staging.phase where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.design_observational_model select * from clinical_trials_staging.design_observational_model where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.design_time_perspective select * from clinical_trials_staging.design_time_perspective where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.design_who_masked select * from clinical_trials_staging.design_who_masked where id in (select id from clinical_trials_staging.queue);
