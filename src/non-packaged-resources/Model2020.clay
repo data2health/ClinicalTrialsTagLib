@@ -2440,7 +2440,7 @@
 </primary-key>
 <unique-key-list/>
 <foreign-key-list>
-<foreign-key alias="" name="FK_phase_1" on-delete="" on-update="" referenced-key="PK_STUDY" referenced-table="study" referenced-table-schema="clinical_trials" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="285a9066:17119adce73:-7fad">
+<foreign-key alias="" name="FK_phase_1" on-delete="CASCADE" on-update="CASCADE" referenced-key="PK_STUDY" referenced-table="study" referenced-table-schema="clinical_trials" remarks="" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="" uid="285a9066:17119adce73:-7fad">
 <foreign-key-description/>
 <foreign-key-figure>
 <fk-fig-bendpoint-list/>

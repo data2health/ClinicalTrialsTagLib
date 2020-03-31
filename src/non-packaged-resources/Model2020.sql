@@ -481,7 +481,7 @@ CREATE TABLE clinical_trials.phase (
      , phase TEXT
      , PRIMARY KEY (id, seqnum)
      , CONSTRAINT FK_phase_1 FOREIGN KEY (id)
-                  REFERENCES clinical_trials.study (id)
+                  REFERENCES clinical_trials.study (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE clinical_trials.arm_group_intervention_name (
