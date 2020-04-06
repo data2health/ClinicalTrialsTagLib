@@ -96,7 +96,7 @@ public class Harvester {
 	    String id_string = object.getJSONObject("FullStudy").getJSONObject("Study").getJSONObject("ProtocolSection").getJSONObject("IdentificationModule").getString("NCTId");
 	    int id = Integer.parseInt(id_string.substring(3));
 	    String last_submit = object.getJSONObject("FullStudy").getJSONObject("Study").getJSONObject("ProtocolSection").getJSONObject("StatusModule").getString("LastUpdateSubmitDate");
-	    logger.info("id: " + id + "\tlast submit: " + last_submit);
+	    logger.debug("id: " + id + "\tlast submit: " + last_submit);
 
 	    PreparedStatement citeStmt = conn.prepareStatement("insert into clinical_trials_staging.raw values (?,?,?::jsonb)");
 	    citeStmt.setInt(1, id);
