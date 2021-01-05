@@ -59,7 +59,7 @@ public class Indexer implements Runnable {
 
 	logger.info("populating queue...");
 	PreparedStatement fetchStmt = initialConn.prepareStatement(
-		"select id from clinical_trials.clinical_study where not exists (select id from clinical_trials_local.cui_cache where cui_cache.id=clinical_study.id) order by id");
+		"select id from clinical_trials.study where not exists (select id from clinical_trials_local.cui_cache where cui_cache.id=study.id) order by id");
 	ResultSet fetchRS = fetchStmt.executeQuery();
 	while (fetchRS.next()) {
 	    idVector.add(fetchRS.getInt(1));
@@ -101,7 +101,7 @@ public class Indexer implements Runnable {
 
     void index(int id) throws SQLException {
 	logger.info("indexing " + id);
-	PreparedStatement fetchStmt = conn.prepareStatement("select brief_title,official_title from clinical_trials.clinical_study where id = ?");
+	PreparedStatement fetchStmt = conn.prepareStatement("select brief_title,official_title from clinical_trials.study where id = ?");
 	fetchStmt.setInt(1, id);
 	ResultSet fetchRS = fetchStmt.executeQuery();
 	while (fetchRS.next()) {
@@ -115,17 +115,21 @@ public class Indexer implements Runnable {
 	    conceptRecognizer.parseSentence(briefTitle);
 	    conceptRecognizer.parseSentence(officialTitle);
 
-	    brief(id);
-	    detailed(id);
-	    biospec(id);
+	    condition(id);
+	    condition_ancestor(id);
+	    condition_browse_leaf(id);
+	    condition_mesh(id);
 	    intervention(id);
-	    study_pop(id);
-	    criteria(id);
-	    reference(id);
-	    result_reference(id);
+	    intervention_ancestor(id);
+	    intervention_browse_branch(id);
+	    intervention_browse_leaf(id);
+	    intervention_mesh(id);
+	    intervention_other_name(id);
 	    keyword(id);
-	    condition_browse(id);
-	    intervention_browse(id);
+	    other_outcome(id);
+	    primary_outcome(id);
+	    reference(id);
+	    secondary_outcome(id);
 
 	    cacheCUIs(id);
 	    conceptRecognizer.reset();
@@ -178,99 +182,149 @@ public class Indexer implements Runnable {
 	cacheStmt.close();
     }
 
-    void brief(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select textblock from clinical_trials.brief_summary where id = ?");
+    void condition(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select condition from clinical_trials.condition where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String textblock = rs.getString(1);
-	    logger.debug("\tbrief: " + textblock);
-	    conceptRecognizer.parseSentences(textblock);
+	    String condition = rs.getString(1);
+	    logger.debug("\tcondition: " + condition);
+	    conceptRecognizer.parseSentences(condition);
 	}
 	stmt.close();
     }
 
-    void detailed(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select textblock from clinical_trials.detailed_description where id = ?");
+    void condition_ancestor(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select condition_ancestor_id,condition_ancestor_term from clinical_trials.condition_ancestor where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String textblock = rs.getString(1);
-	    logger.debug("\tdetailed: " + textblock);
-	    conceptRecognizer.parseSentences(textblock);
+	    String condition_ancestor_id = rs.getString(1);
+	    logger.debug("\tcondition_ancestor_id: " + condition_ancestor_id);
+	    String condition_ancestor_term = rs.getString(2);
+	    logger.debug("\tcondition_ancestor_term: " + condition_ancestor_term);
+	    conceptRecognizer.parseSentences(condition_ancestor_id);
+	    conceptRecognizer.parseSentences(condition_ancestor_term);
 	}
 	stmt.close();
     }
 
-    void biospec(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select textblock from clinical_trials.biospec_descr where id = ?");
+    void condition_browse_leaf(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select condition_browse_leaf_name,condition_browse_leaf_as_found from clinical_trials.condition_browse_leaf where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String textblock = rs.getString(1);
-	    logger.debug("\tbiospec: " + textblock);
-	    conceptRecognizer.parseSentences(textblock);
+	    String condition_browse_leaf_name = rs.getString(1);
+	    logger.debug("\rcondition_browse_leaf_name: " + condition_browse_leaf_name);
+	    conceptRecognizer.parseSentences(condition_browse_leaf_name);
+	    String condition_browse_leaf_as_found = rs.getString(2);
+	    logger.debug("\tcondition_browse_leaf_as_found: " + condition_browse_leaf_as_found);
+	    conceptRecognizer.parseSentences(condition_browse_leaf_as_found);
+	}
+	stmt.close();
+    }
+
+    void condition_mesh(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select condition_mesh_id,condition_mesh_term from clinical_trials.condition_mesh where id = ?");
+	stmt.setInt(1, id);
+	ResultSet rs = stmt.executeQuery();
+	while (rs.next()) {
+	    String condition_mesh_id = rs.getString(1);
+	    logger.debug("\tcondition_mesh_id: " + condition_mesh_id);
+	    conceptRecognizer.parseSentences(condition_mesh_id);
+	    String condition_mesh_term = rs.getString(2);
+	    logger.debug("\tcondition_mesh_term: " + condition_mesh_term);
+	    conceptRecognizer.parseSentences(condition_mesh_term);
 	}
 	stmt.close();
     }
 
     void intervention(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select intervention_name,description from clinical_trials.intervention where id = ?");
+	PreparedStatement stmt = conn.prepareStatement("select intervention_name,intervention_description from clinical_trials.intervention where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String name = rs.getString(1);
-	    String description = rs.getString(2);
-	    logger.debug("\tintervention name: " + name);
-	    logger.debug("\tintervention description: " + description);
-	    conceptRecognizer.parseSentences(name);
-	    conceptRecognizer.parseSentences(description);
+	    String intervention_name = rs.getString(1);
+	    logger.debug("\tintervention_name: " + intervention_name);
+	    conceptRecognizer.parseSentences(intervention_name);
+	    String intervention_description = rs.getString(2);
+	    logger.debug("\tintervention_description: " + intervention_description);
+	    conceptRecognizer.parseSentences(intervention_description);
 	}
 	stmt.close();
     }
 
-    void study_pop(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select textblock from clinical_trials.study_pop where id = ?");
+    void intervention_ancestor(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select intervention_ancestor_id,intervention_ancestor_term from clinical_trials.intervention_ancestor where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String textblock = rs.getString(1);
-	    logger.debug("\tstudy_pop: " + textblock);
-	    conceptRecognizer.parseSentences(textblock);
+	    String intervention_ancestor_id = rs.getString(1);
+	    logger.debug("\tintervention_ancestor_id: " + intervention_ancestor_id);
+	    conceptRecognizer.parseSentences(intervention_ancestor_id);
+	    String intervention_ancestor_term = rs.getString(2);
+	    logger.debug("\tintervention_ancestor_term: " + intervention_ancestor_term);
+	    conceptRecognizer.parseSentences(intervention_ancestor_term);
 	}
 	stmt.close();
     }
 
-    void criteria(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select textblock from clinical_trials.criteria where id = ?");
+    void intervention_browse_branch(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select intervention_browse_branch_abbrev,intervention_browse_branch_name from clinical_trials.intervention_browse_branch where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String textblock = rs.getString(1);
-	    logger.debug("\tcriteria: " + textblock);
-	    conceptRecognizer.parseSentences(textblock);
+	    String intervention_browse_branch_abbrev = rs.getString(1);
+	    logger.debug("\tintervention_browse_branch_abbrev: " + intervention_browse_branch_abbrev);
+	    conceptRecognizer.parseSentences(intervention_browse_branch_abbrev);
+	    String intervention_browse_branch_name = rs.getString(2);
+	    logger.debug("\tintervention_browse_branch_name: " + intervention_browse_branch_name);
+	    conceptRecognizer.parseSentences(intervention_browse_branch_name);
 	}
 	stmt.close();
     }
 
-    void reference(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select pmid from clinical_trials.reference where id = ?");
+    void intervention_browse_leaf(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select intervention_browse_leaf_id,intervention_browse_leaf_name,intervention_browse_leaf_as_found from clinical_trials.intervention_browse_leaf where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String pmid = rs.getString(1);
-	    logger.debug("\treference: " + pmid);
+	    String intervention_browse_leaf_id = rs.getString(1);
+	    String intervention_browse_leaf_name = rs.getString(2);
+	    String intervention_browse_leaf_as_found = rs.getString(3);
+	    logger.debug("\tintervention_browse_leaf_id name: " + intervention_browse_leaf_id);
+	    logger.debug("\tintervention_browse_leaf_name: " + intervention_browse_leaf_name);
+	    logger.debug("\tintervention_browse_leaf_as_found: " + intervention_browse_leaf_as_found);
+	    conceptRecognizer.parseSentences(intervention_browse_leaf_id);
+	    conceptRecognizer.parseSentences(intervention_browse_leaf_name);
+	    conceptRecognizer.parseSentences(intervention_browse_leaf_as_found);
 	}
 	stmt.close();
     }
 
-    void result_reference(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select pmid from clinical_trials.results_reference where id = ?");
+    void intervention_mesh(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select intervention_mesh_id,intervention_mesh_term from clinical_trials.intervention_mesh where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String pmid = rs.getString(1);
-	    logger.debug("\treference: " + pmid);
+	    String intervention_mesh_id = rs.getString(1);
+	    logger.debug("\tintervention_mesh_id: " + intervention_mesh_id);
+	    conceptRecognizer.parseSentences(intervention_mesh_id);
+	    String intervention_mesh_term = rs.getString(2);
+	    logger.debug("\tintervention_mesh_term: " + intervention_mesh_term);
+	    conceptRecognizer.parseSentences(intervention_mesh_term);
+	}
+	stmt.close();
+    }
+
+    void intervention_other_name(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select intervention_other_name from clinical_trials.intervention_other_name where id = ?");
+	stmt.setInt(1, id);
+	ResultSet rs = stmt.executeQuery();
+	while (rs.next()) {
+	    String intervention_other_name = rs.getString(1);
+	    logger.debug("\tintervention_other_name: " + intervention_other_name);
+	    conceptRecognizer.parseSentences(intervention_other_name);
 	}
 	stmt.close();
     }
@@ -282,31 +336,73 @@ public class Indexer implements Runnable {
 	while (rs.next()) {
 	    String keyword = rs.getString(1);
 	    logger.debug("\tkeyword: " + keyword);
-	    conceptRecognizer.parseSentence(keyword);
+	    conceptRecognizer.parseSentences(keyword);
 	}
 	stmt.close();
     }
 
-    void condition_browse(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select mesh from clinical_trials.condition_browse where id = ?");
+    void other_outcome(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select other_outcome_measure,other_outcome_description,other_outcome_time_frame from clinical_trials.other_outcome where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String mesh = rs.getString(1);
-	    logger.debug("\tcondition_browse: " + mesh);
-	    conceptRecognizer.parseSentence(mesh);
+	    String other_outcome_measure = rs.getString(1);
+	    logger.debug("\tother_outcome_measure: " + other_outcome_measure);
+	    conceptRecognizer.parseSentences(other_outcome_measure);
+	    String other_outcome_description = rs.getString(2);
+	    logger.debug("\tother_outcome_description: " + other_outcome_description);
+	    conceptRecognizer.parseSentences(other_outcome_description);
+	    String other_outcome_time_frame = rs.getString(3);
+	    logger.debug("\tother_outcome_time_frame: " + other_outcome_time_frame);
+	    conceptRecognizer.parseSentences(other_outcome_time_frame);
 	}
 	stmt.close();
     }
 
-    void intervention_browse(int id) throws SQLException {
-	PreparedStatement stmt = conn.prepareStatement("select mesh from clinical_trials.intervention_browse where id = ?");
+    void primary_outcome(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select primary_outcome_measure,primary_outcome_description,primary_outcome_time_frame from clinical_trials.primary_outcome where id = ?");
 	stmt.setInt(1, id);
 	ResultSet rs = stmt.executeQuery();
 	while (rs.next()) {
-	    String mesh = rs.getString(1);
-	    logger.debug("\tintervention_browse: " + mesh);
-	    conceptRecognizer.parseSentence(mesh);
+	    String primary_outcome_measure = rs.getString(1);
+	    logger.debug("\tprimary_outcome_measure: " + primary_outcome_measure);
+	    conceptRecognizer.parseSentence(primary_outcome_measure);
+	    String primary_outcome_description = rs.getString(2);
+	    logger.debug("\tprimary_outcome_description: " + primary_outcome_description);
+	    conceptRecognizer.parseSentence(primary_outcome_description);
+	    String primary_outcome_time_frame = rs.getString(3);
+	    logger.debug("\tprimary_outcome_time_frame: " + primary_outcome_time_frame);
+	    conceptRecognizer.parseSentence(primary_outcome_time_frame);
+	}
+	stmt.close();
+    }
+
+    void reference(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select reference_citation from clinical_trials.reference where id = ?");
+	stmt.setInt(1, id);
+	ResultSet rs = stmt.executeQuery();
+	while (rs.next()) {
+	    String reference_citation = rs.getString(1);
+	    logger.debug("\treference_citation: " + reference_citation);
+	    conceptRecognizer.parseSentence(reference_citation);
+	}
+	stmt.close();
+    }
+
+    void secondary_outcome(int id) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement("select secondary_outcome_measure,secondary_outcome_description,secondary_outcome_time_frame from clinical_trials.secondary_outcome where id = ?");
+	stmt.setInt(1, id);
+	ResultSet rs = stmt.executeQuery();
+	while (rs.next()) {
+	    String secondary_outcome_measure = rs.getString(1);
+	    logger.debug("\tsecondary_outcome_measure: " + secondary_outcome_measure);
+	    conceptRecognizer.parseSentence(secondary_outcome_measure);
+	    String secondary_outcome_description = rs.getString(2);
+	    logger.debug("\tsecondary_outcome_description: " + secondary_outcome_description);
+	    conceptRecognizer.parseSentence(secondary_outcome_description);
+	    String secondary_outcome_time_frame = rs.getString(3);
+	    logger.debug("\tsecondary_outcome_time_frame: " + secondary_outcome_time_frame);
+	    conceptRecognizer.parseSentence(secondary_outcome_time_frame);
 	}
 	stmt.close();
     }
