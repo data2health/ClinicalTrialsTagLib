@@ -28,13 +28,13 @@ public class Indexer implements Runnable {
 	String use_ssl = prop_file.getProperty("nihdb.use.ssl", "false");
 	logger.debug("Database SSL: " + use_ssl);
 
-	String databaseHost = prop_file.getProperty("db.host", "localhost");
+	String databaseHost = prop_file.getProperty("db.host");
 	logger.debug("Database Host: " + databaseHost);
 
-	String databaseName = prop_file.getProperty("db.name", "loki");
+	String databaseName = prop_file.getProperty("db.name");
 	logger.debug("Database Name: " + databaseName);
 
-	String db_url = prop_file.getProperty("nihdb.url", "jdbc:postgresql://" + databaseHost + "/" + databaseName);
+	String db_url = prop_file.getProperty("db.url");
 	logger.debug("Database URL: " + db_url);
 
 	Class.forName("org.postgresql.Driver");
@@ -59,7 +59,7 @@ public class Indexer implements Runnable {
 
 	logger.info("populating queue...");
 	PreparedStatement fetchStmt = initialConn.prepareStatement(
-		"select id from clinical_trials.study where not exists (select id from clinical_trials_local.cui_cache where cui_cache.id=study.id) order by id");
+		"select id from clinical_trials.study where not exists (select id from clinical_trials_local.cui_cache where cui_cache.id=study.id) order by id desc");
 	ResultSet fetchRS = fetchStmt.executeQuery();
 	while (fetchRS.next()) {
 	    idVector.add(fetchRS.getInt(1));
