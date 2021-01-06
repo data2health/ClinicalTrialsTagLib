@@ -1,5 +1,6 @@
 refresh materialized view clinical_trials_staging.queue;
 delete from clinical_trials.study where id in (select id from clinical_trials_staging.queue);
+delete from clinical_trials_local.cui_cache where id in (select id from clinical_trials_staging.queue);
 
 insert into clinical_trials.study select * from clinical_trials_staging.study where id in (select id from clinical_trials_staging.queue);
 insert into clinical_trials.nct_id_alias select * from clinical_trials_staging.nct_id_alias where id in (select id from clinical_trials_staging.queue);
