@@ -83,11 +83,43 @@ where cui_tf_idf.cui=mrconso.cui
   and mrconso.tty='PN'
 ;
 
-create materialized view n3c_trials.cui_view as
-select * from clinical_trials_local.cui_view
+----
+
+create materialized view n3c_trials.cui_cache as
+select * from clinical_trials_local.cui_cache
 where id in (select id from n3c_trials.study)
-  and idf > 1.0
+  and phrase !~ '^[0-9]+$'
+  and phrase !~ '^[a-z]{1,2}$'
+  and phrase not in ('and','all','for','with')
 ;
+
+create materialized view n3c_trials.total_count as
+select id,sum(count) as total_count from n3c_trials.cui_cache group by 1 having sum(count) > 0;
+
+create index totid on n3c_trials.total_count(id);
+
+create materialized view n3c_trials.cui_term_count as
+select id,cui,sum(count) as term_count from n3c_trials.cui_cache group by 1,2;
+
+create index ctcid on n3c_trials.cui_term_count(id);
+create index ctcp on n3c_trials.cui_term_count(cui);
+
+create materialized view n3c_trials.cui_idf as
+select cui, log(((select count(*) from n3c_trials.study) * 1.0) / count(distinct id)) as idf from n3c_trials.cui_cache group by 1;
+
+create index cidfp on n3c_trials.cui_idf(cui);
+
+create materialized view n3c_trials.cui_tf_idf as
+select cui_term_count.id, cui_term_count.cui, term_count, total_count, (term_count * 1.0 / total_count) as tf, idf, (term_count * 1.0 / total_count)*idf as tf_idf
+from n3c_trials.cui_term_count, n3c_trials.total_count, n3c_trials.cui_idf
+where cui_term_count.id=total_count.id and cui_term_count.cui=cui_idf.cui order by 1,2;
+
+create index ctfidfid on n3c_trials.cui_tf_idf(id);
+create index ctfidfp on n3c_trials.cui_tf_idf(cui);
+
+----
+
+create table n3c_trials.cui_suppress(cui text primary key, suppress boolean);
 
 -- scripting
 
