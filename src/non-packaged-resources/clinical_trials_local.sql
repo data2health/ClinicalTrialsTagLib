@@ -75,6 +75,20 @@ create index ctfidfp on clinical_trials_local.cui_tf_idf(cui);
 select cui,str from mrconso where tty='PN' order by cui;
 select * from mrsty natural join clinical_trials_local.cui_cache limit 1000;
 
+create materialized view clinical_trials_local.cui_view as
+select id,mrconso.cui,str,stn,sty,term_count,total_count,tf,idf,tf_idf
+from clinical_trials_local.cui_tf_idf, umls.mrconso, umls.mrsty
+where cui_tf_idf.cui=mrconso.cui
+  and mrconso.cui=mrsty.cui
+  and mrconso.tty='PN'
+;
+
+create materialized view n3c_trials.cui_view as
+select * from clinical_trials_local.cui_view
+where id in (select id from n3c_trials.study)
+  and idf > 1.0
+;
+
 -- scripting
 
 ct_index
