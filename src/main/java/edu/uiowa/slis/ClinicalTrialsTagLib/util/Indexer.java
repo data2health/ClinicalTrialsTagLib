@@ -136,7 +136,7 @@ public class Indexer implements Runnable {
 			keyword(id);
 			other_outcome(id);
 			primary_outcome(id);
-			reference(id);
+			// reference(id); // disabled for now, as it's pulling in UMLS concepts not relevant to this trial
 			secondary_outcome(id);
 
 			cacheCUIs(id);
